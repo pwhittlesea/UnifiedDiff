@@ -65,11 +65,11 @@ class Diff {
                 continue;
             }
 
-            if (preg_match('#^@@ -([0-9]+),([0-9]+) \+([0-9]+),([0-9]+) @@ ?(.*)#', $line, $matches)) {
+            if (preg_match('#^@@ -([0-9]+),?([0-9]+)? \+([0-9]+),?([0-9]+)? @@ ?(.*)#', $line, $matches)) {
                 $files[$current_file]['hunks_def'][$current_hunk] = array(
                     '-' => array($matches[1], $matches[2]),
                     '+' => array($matches[3], $matches[4]),
-                    'heading' => (isset($matches[5])) ? $matches[5] : ''
+                    'heading' => $matches[5]
                 );
 
                 // Prepare for diffs

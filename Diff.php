@@ -91,21 +91,21 @@ class Diff {
 
             // Removed lines
             if (preg_match('#^-(.*)$#', $line, $matches)) {
-                $files[$current_file]['hunks'][$current_hunk-1][] = array('-', $b_line++, null, $matches[1]);
+                $files[$current_file]['hunks'][$current_hunk-1][] = array('-', $b_line++, null, htmlspecialchars($matches[1]));
 
                 continue;
             }
 
             // Additional lines
             if (preg_match('#^\+(.*)$#', $line, $matches)) {
-                $files[$current_file]['hunks'][$current_hunk-1][] = array('+', null, $a_line++, $matches[1]);
+                $files[$current_file]['hunks'][$current_hunk-1][] = array('+', null, $a_line++, htmlspecialchars($matches[1]));
 
                 continue;
             }
 
             // Context lines
             if (preg_match('#^\s(.*)$#', $line, $matches)) {
-                $files[$current_file]['hunks'][$current_hunk-1][] = array(' ', $b_line++, $a_line++, substr($line, 1));
+                $files[$current_file]['hunks'][$current_hunk-1][] = array(' ', $b_line++, $a_line++, htmlspecialchars(substr($line, 1)));
 
                 continue;
             }
